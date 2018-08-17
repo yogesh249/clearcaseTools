@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import utilities.Util;
+import util.DOS;
 public class backupFrame extends JFrame {
 
     JLabel lblViewPath  = new JLabel("View Path");
@@ -43,7 +43,7 @@ public class backupFrame extends JFrame {
                 {
                     //JOptionPane.showMessageDialog(null, "Command = " + command);
                     //JOptionPane.showMessageDialog(null, "View Path = " +viewPath);
-                    String bf = Util.executeCommand(command, viewPath);
+                    String bf = DOS.executeCommand(command, viewPath);
                     //Convert the String to a set of lines.
                     Set set = getFiles(bf);
                     Set set2 = new HashSet();
@@ -156,11 +156,11 @@ public class backupFrame extends JFrame {
             String currentDay =String.valueOf(d.getDate()); 
             String hours = d.getHours() <=9 ? "0"+d.getHours() : String.valueOf(d.getHours());
             String minutes = d.getMinutes()<=9 ? "0" + d.getMinutes() : String.valueOf(d.getMinutes());
-            Util.executeCommand("mkdir "+outputDirPath+currentYear);
-            Util.executeCommand("mkdir "+outputDirPath+currentYear+"\\"+months[d.getMonth()]);
-            Util.executeCommand("mkdir "+outputDirPath+currentYear+"\\"+months[d.getMonth()]+"\\"+currentDay);
+            DOS.executeCommand("mkdir "+outputDirPath+currentYear);
+            DOS.executeCommand("mkdir "+outputDirPath+currentYear+"\\"+months[d.getMonth()]);
+            DOS.executeCommand("mkdir "+outputDirPath+currentYear+"\\"+months[d.getMonth()]+"\\"+currentDay);
             String finalOutputDir = outputDirPath+currentYear+"\\"+months[d.getMonth()]+"\\"+currentDay+"\\"+hours+"."+minutes;            
-            Util.executeCommand("mkdir "+ finalOutputDir);
+            DOS.executeCommand("mkdir "+ finalOutputDir);
             boolean status = write2File(null, set, finalOutputDir + "\\filePaths.txt"); 
             Iterator it = set.iterator();
             while(it.hasNext())
@@ -179,7 +179,7 @@ public class backupFrame extends JFrame {
                 }
                 else
                 {
-                    Util.executeCommand(copyCommand);                    
+                    DOS.executeCommand(copyCommand);                    
                 }
 
             }
@@ -188,7 +188,7 @@ public class backupFrame extends JFrame {
 //            {
 //                JOptionPane.showMessageDialog(null, "Couldn't write to file ");
 //            }
-            Util.executeCommand("explorer " + finalOutputDir);
+            DOS.executeCommand("explorer " + finalOutputDir);
             return true;
         }
         catch(Exception e)
