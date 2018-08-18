@@ -1,2 +1,2 @@
 # clearcaseTools
-Tools for clearcase
+Tools for IBM clearcase
